@@ -10,7 +10,9 @@ class OperatorBase(BaseModel):
         ..., min_length=1, max_length=100, description="Имя оператора"
     )
     is_active: bool = Field(default=True, description="Активен ли оператор")
-    max_load: int = Field(gt=0, le=100, description="Максимальная нагрузка")
+    max_load: int = Field(
+        gt=0, le=100, description="Максимальная нагрузка (1-100)"
+    )
 
 
 class OperatorCreate(OperatorBase):
