@@ -31,9 +31,10 @@ async def get_db() -> AsyncGenerator[AsyncSession]:
 
 
 async def init_database() -> None:
-    """Инициализация базы данных при старте приложения."""
-
-    from app.models import contact, lead, operator, source  # noqa: F401
+    """
+    Инициализация базы данных при старте приложения.
+    """
+    pass
 
 
 async def close_database() -> None:
