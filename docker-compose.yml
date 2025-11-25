@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./crm_lead_router.db:/app/crm_lead_router.db
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./crm_lead_router.db
+    restart: unless-stopped

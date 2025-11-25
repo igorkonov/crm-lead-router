@@ -13,6 +13,21 @@
 
 ## Быстрый старт
 
+### Вариант 1: Docker
+
+```bash
+# Запуск
+docker-compose up --build
+
+# В фоне
+docker-compose up -d
+
+# Остановка
+docker-compose down
+```
+
+### Вариант 2: Локально
+
 ```bash
 # Установка зависимостей
 uv sync
@@ -157,6 +172,7 @@ curl -X POST http://localhost:8000/api/v1/contacts \
 - Pydantic v2
 - uv для зависимостей
 - Alembic для миграций
+- Docker + Docker Compose
 
 ## Тестирование
 
@@ -169,6 +185,16 @@ uv run pytest --cov=app
 
 # Конкретный тест
 uv run pytest tests/test_distribution.py::test_weighted_distribution_proportions
+```
+
+### Тестирование в Docker
+
+```bash
+# Запустить тесты в контейнере
+docker-compose run --rm app uv run pytest
+
+# С покрытием
+docker-compose run --rm app uv run pytest --cov=app
 ```
 
 ## Структура проекта
@@ -213,3 +239,10 @@ uv run alembic upgrade head
 # Тест распределения - создает 100 обращений и показывает статистику
 ./scripts/test_distribution.sh
 ```
+
+### Особенности
+
+- База данных SQLite монтируется как volume для сохранения данных
+- Миграции применяются автоматически при старте
+- Приложение доступно на http://localhost:8000
+- Swagger документация на http://localhost:8000/docs
